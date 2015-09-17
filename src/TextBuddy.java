@@ -4,9 +4,10 @@
  * will create that file as an empty file. User is only allowed to delete
  * one line of the text file using the delete command, and deletion can
  * only be done by providing its corresponding line number, failing which,
- * the program will return an error message. When giving clear or display
- * commands, there must be no more parameters together with that command,
- * or the program will return an error message. It is also assumed that the
+ * the program will return an error message. When giving clear, exit, sort,
+ * or display commands, there must be no more parameters together with that command,
+ * or the program will return an error message. User can only search for one word
+ * at a time, or an error message will be returned. It is also assumed that the
  * user will not meddle/edit/delete file when this program is running.
  * The command format is given by the example interaction below:
  * 
@@ -190,7 +191,8 @@ public class TextBuddy {
 	}
 
 	private String sort() {
-		return textFile.sort();
+		String feedback = textFile.sort();
+		return feedback;
 	}
 
 	public void writeFileAndExit() {
