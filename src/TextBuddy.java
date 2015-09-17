@@ -42,6 +42,7 @@ import java.io.PrintWriter;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TextBuddy {
 	// These are the list of messages to display to user.
@@ -169,7 +170,7 @@ public class TextBuddy {
 			case CLEAR :
 				return clear();
 			case SORT :
-				return String.format(MESSAGE_SORT, textFile.getFileName());
+				return sort();
 			case INVALID :
 				return String.format(MESSAGE_INVALID_FORMAT, userCommand);
 			case EXIT :
@@ -178,6 +179,11 @@ public class TextBuddy {
 				// throw an error if the command is not recognized
 				throw new Error(MESSAGE_ERROR_TYPE_COMMAND);
 		}
+	}
+
+	private String sort() {
+		textFile.sort();
+		return String.format(MESSAGE_SORT, textFile.getFileName());
 	}
 
 	public void writeFileAndExit() {
@@ -421,6 +427,10 @@ public class TextBuddy {
 				errorMessageDisplayer.displayError(MESSAGE_ERROR_READ_FILE);
 				System.exit(STATUS_CODE_EXIT);
 			}
+		}
+		
+		public void sort() {
+			Collections.sort(textFileLines);
 		}
 		
 		private void extractContents(FileReader fileToBeRead) throws IOException {
