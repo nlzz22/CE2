@@ -88,6 +88,9 @@ public class TextBuddy {
 
 	// This is the location of the word of a string.
 	private static final int PARAM_POSITION_FIRST_WORD = 0;
+	
+	// This is the location of the first letter of a string.
+	private static final int PARAM_POSITION_FIRST_LETTER = 0;
 
 	// This is the location at which various parameter will appear in a command
 	private static final int PARAM_POSITION_NUMBER = 0;
@@ -203,7 +206,7 @@ public class TextBuddy {
 	}
 	
 	public String search(String searchWord) {
-		return String.format(MESSAGE_SEARCH_FAIL, searchWord);
+		return textFile.search(searchWord);
 	}
 
 	public String addLine(String textLineToAdd) {
@@ -446,6 +449,41 @@ public class TextBuddy {
 			} else {
 				Collections.sort(textFileLines);
 				return String.format(MESSAGE_SORT, fileName);
+			}
+		}
+		
+		public String search(String searchWord) {
+			return findAllLinesWithWord(searchWord);	
+		}
+		
+		private String findAllLinesWithWord(String searchWord) {
+			String allLinesWithWord = EMPTY_STRING;
+			
+			for (int i = 0; i < textFileLines.size(); i++) {
+				String lineToCheck = textFileLines.get(i);
+				
+				if (lineToCheck.contains(searchWord)) {
+					int lineNumber = i + OFFSET;
+					allLinesWithWord = allLinesWithWord + lineNumber + DOT_AND_SPACE + lineToCheck + NEWLINE;
+				}
+			}
+			
+			if (isEmptyString(allLinesWithWord)) {
+				return String.format(MESSAGE_SEARCH_FAIL, searchWord);
+			} else {
+				return removeLastNewline(allLinesWithWord);
+			}
+		}
+		
+		private String removeLastNewline(String givenString) {
+			return givenString.substring(PARAM_POSITION_FIRST_LETTER, givenString.length() - OFFSET);
+		}
+		
+		private boolean isEmptyString(String givenString) {
+			if (givenString.trim().equals(EMPTY_STRING)) {
+				return true;
+			} else {
+				return false;
 			}
 		}
 		
