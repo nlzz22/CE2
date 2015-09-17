@@ -110,5 +110,6 @@ public class TextBuddyTest {
 		TextBuddy tb = new TextBuddy("mytextfile.txt");
 		assertEquals("added to mytextfile.txt: \"zzz\"", tb.processUserCommand("add zzz"));
 		assertEquals("\"a\" is not found", tb.processUserCommand("search a"));
+		assertEquals("1. zzz", tb.processUserCommand("search zzz"));
 	}
 }
