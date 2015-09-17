@@ -100,6 +100,8 @@ public class TextBuddyTest {
 		assertEquals("added to mytextfile.txt: \"tomorrow\"", tb.processUserCommand("add tomorrow"));
 		assertEquals("mytextfile.txt is sorted", tb.processUserCommand("sort"));
 		assertEquals("1. a\n2. bbb\n3. tomorrow\n4. ww\n5. wwa\n6. www\n7. yyy\n8. zzz", tb.processUserCommand("display"));
+		assertEquals("all content deleted from mytextfile.txt", tb.processUserCommand("clear"));
+		assertEquals("mytextfile.txt is empty", tb.processUserCommand("sort"));
+		assertEquals("mytextfile.txt is empty", tb.processUserCommand("display"));
 	}
-
 }
