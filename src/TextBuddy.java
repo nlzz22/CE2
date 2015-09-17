@@ -51,6 +51,7 @@ public class TextBuddy {
 	private static final String MESSAGE_DELETE_LINE = "deleted from %1$s: \"%2$s\"";
 	private static final String MESSAGE_CLEAR = "all content deleted from %1$s";
 	private static final String MESSAGE_SORT = "%1$s is sorted";
+	private static final String MESSAGE_SEARCH_FAIL = "\"%1$s\" is not found";
 	private static final String MESSAGE_DISPLAY_EMPTY = "%1$s is empty";
 	private static final String MESSAGE_QUERY = "command: ";
 	private static final String MESSAGE_INVALID_FORMAT = "Invalid command encountered for: %1$s";
@@ -66,6 +67,7 @@ public class TextBuddy {
 	private static final String COMMAND_DELETE_LINE = "delete";
 	private static final String COMMAND_CLEAR = "clear";
 	private static final String COMMAND_SORT = "sort";
+	private static final String COMMAND_SEARCH = "search";
 	private static final String COMMAND_EXIT = "exit";
 
 	// Special Strings
@@ -101,7 +103,7 @@ public class TextBuddy {
 
 	// These are the possible command types.
 	private enum CommandType {
-		ADD_LINE, DISPLAY, DELETE_LINE, CLEAR, INVALID, EXIT, ADD, SORT
+		ADD_LINE, DISPLAY, DELETE_LINE, CLEAR, INVALID, EXIT, ADD, SORT, SEARCH
 	};
 
 	public TextBuddy(String fileName) {
@@ -171,6 +173,8 @@ public class TextBuddy {
 				return clear();
 			case SORT :
 				return sort();
+			case SEARCH :
+				return search(message);
 			case INVALID :
 				return String.format(MESSAGE_INVALID_FORMAT, userCommand);
 			case EXIT :
@@ -196,6 +200,10 @@ public class TextBuddy {
 		} catch (IndexOutOfBoundsException exception) {
 			return String.format(MESSAGE_INVALID_FORMAT, userCommand);
 		}
+	}
+	
+	public String search(String searchWord) {
+		return String.format(MESSAGE_SEARCH_FAIL, searchWord);
 	}
 
 	public String addLine(String textLineToAdd) {
@@ -299,6 +307,8 @@ public class TextBuddy {
 					} else {
 						return false;
 					}
+				case SEARCH :
+					return true;
 				case DELETE_LINE :
 					return isValidDelete(message);
 				default :
@@ -349,6 +359,8 @@ public class TextBuddy {
 				return CommandType.CLEAR;
 			} else if (commandTypeString.equalsIgnoreCase(COMMAND_SORT)) {
 				return CommandType.SORT;
+			} else if (commandTypeString.equalsIgnoreCase(COMMAND_SEARCH)) {
+				return CommandType.SEARCH;
 			} else if (commandTypeString.equalsIgnoreCase(COMMAND_EXIT)) {
 				return CommandType.EXIT;
 			} else {
