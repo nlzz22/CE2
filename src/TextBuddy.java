@@ -81,6 +81,7 @@ public class TextBuddy {
 
 	// This is the correct number of parameter for the command
 	private static final int PARAM_SIZE_FOR_DELETE_LINE = 1;
+	private static final int PARAM_SIZE_FOR_SEARCH = 1;
 
 	// This is the location at which the parameter will appear in the argument
 	// when running the program.
@@ -293,10 +294,10 @@ public class TextBuddy {
 			}
 		}	
 		
-		private boolean isValidCommand(CommandType commandType, String message) {
+		private boolean isValidCommand(CommandType commandType, String givenMessage) {
 			switch (commandType) {
 				case ADD_LINE :
-					if (isEmptyString(message)) {
+					if (isEmptyString(givenMessage)) {
 						return false;
 					} else {
 						return true;
@@ -305,22 +306,22 @@ public class TextBuddy {
 				case CLEAR :
 				case SORT :
 				case EXIT :
-					if (isEmptyString(message)) {
+					if (isEmptyString(givenMessage)) {
 						return true;
 					} else {
 						return false;
 					}
 				case SEARCH :
-					return true;
+					return isValidSearch(givenMessage);
 				case DELETE_LINE :
-					return isValidDelete(message);
+					return isValidDelete(givenMessage);
 				default :
 					return false;
 			}
 		}
 		
-		private boolean isValidDelete(String message) {
-			String[] parameters = splitParameters(message);
+		private boolean isValidDelete(String givenMessage) {
+			String[] parameters = splitParameters(givenMessage);
 			
 			if (parameters.length != PARAM_SIZE_FOR_DELETE_LINE) {
 				return false;
@@ -332,6 +333,18 @@ public class TextBuddy {
 				return true;
 			} else {
 				return false;
+			}
+		}
+		
+		private boolean isValidSearch(String givenMessage) {
+			String[] parameters = splitParameters(givenMessage);
+			
+			if (parameters.length != PARAM_SIZE_FOR_SEARCH) {
+				return false;
+			} else if (isEmptyString(parameters[PARAM_POSITION_FIRST_WORD])) {
+				return false;
+			} else {
+				return true;
 			}
 		}
 		
