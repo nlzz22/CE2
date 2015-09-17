@@ -182,8 +182,7 @@ public class TextBuddy {
 	}
 
 	private String sort() {
-		textFile.sort();
-		return String.format(MESSAGE_SORT, textFile.getFileName());
+		return textFile.sort();
 	}
 
 	public void writeFileAndExit() {
@@ -429,8 +428,13 @@ public class TextBuddy {
 			}
 		}
 		
-		public void sort() {
-			Collections.sort(textFileLines);
+		public String sort() {
+			if (textFileLines.isEmpty()) {
+				return String.format(MESSAGE_DISPLAY_EMPTY, fileName);
+			} else {
+				Collections.sort(textFileLines);
+				return String.format(MESSAGE_SORT, fileName);
+			}
 		}
 		
 		private void extractContents(FileReader fileToBeRead) throws IOException {
