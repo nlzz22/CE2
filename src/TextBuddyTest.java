@@ -83,7 +83,7 @@ public class TextBuddyTest {
 		assertEquals("added to mytextfile.txt: \"zebras are black and white\"", tb.processUserCommand("add zebras are black and white"));
 		assertEquals("added to mytextfile.txt: \"apple of my eye\"", tb.processUserCommand("add apple of my eye"));
 		assertEquals("mytextfile.txt is sorted", tb.processUserCommand("sort"));
-		
+		assertEquals("1. apple of my eye.\n2. zebras are black and white", tb.processUserCommand("display"));
 	}
 
 }
