@@ -84,6 +84,22 @@ public class TextBuddyTest {
 		assertEquals("added to mytextfile.txt: \"apple of my eye\"", tb.processUserCommand("add apple of my eye"));
 		assertEquals("mytextfile.txt is sorted", tb.processUserCommand("sort"));
 		assertEquals("1. apple of my eye\n2. zebras are black and white", tb.processUserCommand("display"));
+		assertEquals("Invalid command encountered for: sort b", tb.processUserCommand("sort b"));
+	}
+	
+	@Test
+	public void testSort() {
+		TextBuddy tb = new TextBuddy("mytextfile.txt");
+		assertEquals("added to mytextfile.txt: \"zzz\"", tb.processUserCommand("add zzz"));
+		assertEquals("added to mytextfile.txt: \"yyy\"", tb.processUserCommand("add yyy"));
+		assertEquals("added to mytextfile.txt: \"www\"", tb.processUserCommand("add www"));
+		assertEquals("added to mytextfile.txt: \"wwa\"", tb.processUserCommand("add wwa"));
+		assertEquals("added to mytextfile.txt: \"ww\"", tb.processUserCommand("add ww"));
+		assertEquals("added to mytextfile.txt: \"bbb\"", tb.processUserCommand("add bbb"));
+		assertEquals("added to mytextfile.txt: \"a\"", tb.processUserCommand("add a"));
+		assertEquals("added to mytextfile.txt: \"tomorrow\"", tb.processUserCommand("add tomorrow"));
+		assertEquals("mytextfile.txt is sorted", tb.processUserCommand("sort"));
+		assertEquals("1. a\n2. bbb\n3. tomorrow\n4. ww\n5. wwa\n6. www\n7. yyy\n8. zzz", tb.processUserCommand("display"));
 	}
 
 }
