@@ -104,4 +104,11 @@ public class TextBuddyTest {
 		assertEquals("mytextfile.txt is empty", tb.processUserCommand("sort"));
 		assertEquals("mytextfile.txt is empty", tb.processUserCommand("display"));
 	}
+	
+	@Test
+	public void testSearch() {
+		TextBuddy tb = new TextBuddy("mytextfile.txt");
+		assertEquals("added to mytextfile.txt: \"zzz\"", tb.processUserCommand("add zzz"));
+		assertEquals("\"a\" is not found", tb.processUserCommand("search a"));
+	}
 }
