@@ -49,6 +49,7 @@ public class TextBuddy {
 	private static final String MESSAGE_ADD_LINE = "added to %1$s: \"%2$s\"";
 	private static final String MESSAGE_DELETE_LINE = "deleted from %1$s: \"%2$s\"";
 	private static final String MESSAGE_CLEAR = "all content deleted from %1$s";
+	private static final String MESSAGE_SORT = "%1$s is sorted";
 	private static final String MESSAGE_DISPLAY_EMPTY = "%1$s is empty";
 	private static final String MESSAGE_QUERY = "command: ";
 	private static final String MESSAGE_INVALID_FORMAT = "Invalid command encountered for: %1$s";
@@ -63,6 +64,7 @@ public class TextBuddy {
 	private static final String COMMAND_DISPLAY = "display";
 	private static final String COMMAND_DELETE_LINE = "delete";
 	private static final String COMMAND_CLEAR = "clear";
+	private static final String COMMAND_SORT = "sort";
 	private static final String COMMAND_EXIT = "exit";
 
 	// Special Strings
@@ -98,7 +100,7 @@ public class TextBuddy {
 
 	// These are the possible command types.
 	private enum CommandType {
-		ADD_LINE, DISPLAY, DELETE_LINE, CLEAR, INVALID, EXIT, ADD
+		ADD_LINE, DISPLAY, DELETE_LINE, CLEAR, INVALID, EXIT, ADD, SORT
 	};
 
 	public TextBuddy(String fileName) {
@@ -166,6 +168,8 @@ public class TextBuddy {
 				return deleteLine(message, userCommand);
 			case CLEAR :
 				return clear();
+			case SORT :
+				return String.format(MESSAGE_SORT, textFile.getFileName());
 			case INVALID :
 				return String.format(MESSAGE_INVALID_FORMAT, userCommand);
 			case EXIT :
@@ -283,6 +287,7 @@ public class TextBuddy {
 					}
 				case DISPLAY :
 				case CLEAR :
+				case SORT :
 				case EXIT :
 					if (isEmptyString(message)) {
 						return true;
@@ -337,6 +342,8 @@ public class TextBuddy {
 				return CommandType.DELETE_LINE;
 			} else if (commandTypeString.equalsIgnoreCase(COMMAND_CLEAR)) {
 				return CommandType.CLEAR;
+			} else if (commandTypeString.equalsIgnoreCase(COMMAND_SORT)) {
+				return CommandType.SORT;
 			} else if (commandTypeString.equalsIgnoreCase(COMMAND_EXIT)) {
 				return CommandType.EXIT;
 			} else {
