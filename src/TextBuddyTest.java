@@ -111,5 +111,6 @@ public class TextBuddyTest {
 		assertEquals("added to mytextfile.txt: \"zzz\"", tb.processUserCommand("add zzz"));
 		assertEquals("\"a\" is not found", tb.processUserCommand("search a"));
 		assertEquals("1. zzz", tb.processUserCommand("search zzz"));
+		assertEquals("Invalid command encountered for: search", tb.processUserCommand("search"));
 	}
 }
