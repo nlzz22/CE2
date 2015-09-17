@@ -112,5 +112,12 @@ public class TextBuddyTest {
 		assertEquals("\"a\" is not found", tb.processUserCommand("search a"));
 		assertEquals("1. zzz", tb.processUserCommand("search zzz"));
 		assertEquals("Invalid command encountered for: search", tb.processUserCommand("search"));
+		assertEquals("added to mytextfile.txt: \"ss zz\"", tb.processUserCommand("add ss zz"));
+		assertEquals("added to mytextfile.txt: \"y2k\"", tb.processUserCommand("add y2k"));
+		assertEquals("\"sz\" is not found", tb.processUserCommand("search sz"));
+		assertEquals("1. zzz\n2. ss zz", tb.processUserCommand("search z"));
+		assertEquals("mytextfile.txt is sorted", tb.processUserCommand("sort"));
+		assertEquals("1. ss zz\n3. zzz", tb.processUserCommand("search z"));
+		assertEquals("2. y2k", tb.processUserCommand("search 2"));
 	}
 }
